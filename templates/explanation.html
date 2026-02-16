@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}{{ topic }} - AI Learning Platform{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2>📚 {{ topic }}</h2>
+        <span style="background: #3498db; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.9rem;">
+            {{ academic_level.title() }} Level
+        </span>
+    </div>
+    
+    <div class="explanation-content">
+        {{ explanation.explanation | replace('\n', '<br>') | safe }}
+    </div>
+    
+    {% if explanation.summary %}
+    <div class="summary-box">
+        <h4>📝 Summary</h4>
+        <p>{{ explanation.summary }}</p>
+    </div>
+    {% endif %}
+    
+    {% if explanation.examples %}
+    <div class="examples-list">
+        <h4>🌟 Examples</h4>
+        <ul>
+            {% for example in explanation.examples %}
+            <li>{{ example }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="{{ url_for('dashboard') }}" class="btn">Learn Another Topic</a>
+        <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print/Save</button>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Want to learn more?</h3>
+    <p>Try asking about related topics or switch your academic level for different perspectives!</p>
+    
+    <form method="POST" action="{{ url_for('explain_topic') }}" style="margin-top: 1rem;">
+        <div class="form-group">
+            <input type="text" name="topic" placeholder="Ask about another topic..." required>
+        </div>
+        <button type="submit" class="btn">Get Another Explanation</button>
+    </form>
+</div>
+{% endblock %}

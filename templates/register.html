@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Register - AI Learning Platform{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 class="text-center">Create Your Account</h2>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="academic_level">Academic Level</label>
+            <select id="academic_level" name="academic_level" required>
+                <option value="">Select your level</option>
+                <option value="school">School (K-12)</option>
+                <option value="college">College/University</option>
+                <option value="degree">Graduate/Professional</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%;">Register</button>
+    </form>
+    
+    <div class="text-center mt-2">
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+    </div>
+</div>
+{% endblock %}

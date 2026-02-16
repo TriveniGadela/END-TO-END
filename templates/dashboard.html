@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AI Learning Platform{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome, {{ user_name }}! 👋</h2>
+    <p style="color: #666;">Current Level: <strong>{{ academic_level.title() }}</strong></p>
+</div>
+
+<div class="card">
+    <h3>Learn About Any Topic</h3>
+    <form method="POST" action="{{ url_for('explain_topic') }}">
+        <div class="form-group">
+            <label for="topic">What would you like to learn about?</label>
+            <input type="text" id="topic" name="topic" placeholder="e.g., Photosynthesis, Machine Learning, Shakespeare..." required>
+        </div>
+        <button type="submit" class="btn">Get AI Explanation</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Update Academic Level</h3>
+    <form method="POST" action="{{ url_for('update_level') }}">
+        <div class="form-group">
+            <label for="academic_level">Change your academic level for better personalized content:</label>
+            <select id="academic_level" name="academic_level" required>
+                <option value="school" {% if academic_level == 'school' %}selected{% endif %}>School (K-12)</option>
+                <option value="college" {% if academic_level == 'college' %}selected{% endif %}>College/University</option>
+                <option value="degree" {% if academic_level == 'degree' %}selected{% endif %}>Graduate/Professional</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-secondary">Update Level</button>
+    </form>
+</div>
+
+<div style="background: #e8f4fd; padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+    <h4>💡 How it works:</h4>
+    <ol style="margin: 1rem 0; padding-left: 2rem;">
+        <li>Enter any topic you want to learn about</li>
+        <li>Our AI will explain it at your academic level</li>
+        <li>Get simple explanations with real-world examples</li>
+        <li>Update your level anytime for different complexity</li>
+    </ol>
+</div>
+{% endblock %}
